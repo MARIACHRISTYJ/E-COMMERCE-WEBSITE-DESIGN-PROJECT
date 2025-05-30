@@ -1,0 +1,1694 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            href="https://fonts.googleapis.com/css?family=karla"
+            rel="stylesheet"
+        />
+        <title>E-COMMERCE WEBSITE DESIGN</title>
+        <style>
+            /* Basic CSS */
+            body,
+            html {
+                margin: 0;
+                padding: 0;
+                font-family: Arial, sans-serif;
+                scroll-behavior: smooth; /* For smooth scrolling to top */
+            }
+
+            .navbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 30px;
+                background: mediumaquamarine;
+                color: black;
+                position: sticky; /* Make navbar sticky */
+                top: 0;
+                z-index: 1000; /* Ensure it stays on top */
+            }
+
+            .navbar ul {
+                list-style: none;
+                display: flex;
+                margin: 0;
+                padding: 0;
+            }
+
+            .navbar ul li {
+                margin-left: 20px;
+            }
+
+            .navbar ul li a {
+                color: white;
+                text-decoration: none;
+                transition: color 0.3s ease; /* Smooth hover effect */
+            }
+
+            .navbar ul li a:hover {
+                color: #f0f0f0;
+            }
+
+            .section {
+                display: none;
+                padding: 20px;
+                min-height: calc(
+                    100vh - 150px
+                ); /* Adjust height to fill viewport, considering footer/navbar */
+            }
+
+            .section.active {
+                display: block;
+            }
+
+            .slider-frame {
+                overflow: hidden;
+                height: 800px;
+                width: 1200px;
+                margin: 20px auto; /* Center the slider */
+                border-radius: 8px; /* Slightly rounded corners */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            /*---------- SLIDE ANIMATION --------------*/
+            @keyframes slide_animation {
+                0% {
+                    left: 0px;
+                }
+
+                10% {
+                    left: 0px;
+                }
+
+                20% {
+                    left: -1200px;
+                } /* Changed to negative for left movement */
+                30% {
+                    left: -1200px;
+                }
+
+                40% {
+                    left: -2400px;
+                } /* Changed to negative for left movement */
+                50% {
+                    left: -2400px;
+                }
+
+                60% {
+                    left: -1200px;
+                }
+
+                70% {
+                    left: -1200px;
+                }
+
+                80% {
+                    left: 0px;
+                }
+
+                90% {
+                    left: 0px;
+                }
+
+                100% {
+                    left: 0px;
+                }
+            }
+
+            @-webkit-keyframes slide_animation {
+                0% {
+                    left: 0px;
+                }
+
+                10% {
+                    left: 0px;
+                }
+
+                20% {
+                    left: -1200px;
+                }
+
+                30% {
+                    left: -1200px;
+                }
+
+                40% {
+                    left: -2400px;
+                }
+
+                50% {
+                    left: -2400px;
+                }
+
+                60% {
+                    left: -1200px;
+                }
+
+                70% {
+                    left: -1200px;
+                }
+
+                80% {
+                    left: 0px;
+                }
+
+                90% {
+                    left: 0px;
+                }
+
+                100% {
+                    left: 0px;
+                }
+            }
+
+            .slide-images {
+                width: 3600px; /* 3 images * 1200px width */
+                height: 800px;
+                margin: 0; /* Adjusted margin */
+                position: relative;
+                -webkit-animation-name: slide_animation;
+                animation-name: slide_animation;
+                -webkit-animation-duration: 10s;
+                animation-duration: 10s;
+                -webkit-animation-iteration-count: infinite;
+                animation-iteration-count: infinite;
+                -webkit-animation-direction: alternate;
+                animation-direction: alternate;
+                -webkit-animation-play-state: running;
+                animation-play-state: running;
+            }
+
+            .img-container {
+                height: 800px;
+                width: 1200px;
+                position: relative;
+                float: left;
+            }
+
+            .category-list {
+                display: flex;
+                gap: 20px;
+                margin-bottom: 20px;
+                flex-wrap: wrap;
+                justify-content: center; /* Center categories */
+            }
+
+            .category {
+                flex: 1;
+                min-width: 280px; /* Increased min-width for better display */
+                max-width: 350px;
+                border: 1px solid #ddd;
+                padding: 15px;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+                transition:
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease;
+                cursor: pointer;
+            }
+
+            .category:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .category img {
+                display: block;
+                width: 100%; /* Make images fill the category div */
+                height: 200px; /* Fixed height for consistency */
+                object-fit: cover; /* Cover the area, crop if necessary */
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+
+            .category p {
+                text-align: center;
+                font-weight: bold;
+                color: #333;
+            }
+
+            .product-heading {
+                width: 100%;
+                margin-left: 20px;
+                text-align: left;
+                margin-bottom: 10px;
+                font-size: 1.8em;
+                color: #333;
+            }
+
+            .shop-by-category h2,
+            .latest-products h2,
+            .features h2,
+            .products-list h2,
+            #product-view h2,
+            .related-products h2,
+            #category h2,
+            #cart h2,
+            #checkout h2,
+            #order-confirmation h2,
+            #about h2,
+            #contact h2,
+            #search h2 {
+                text-align: center;
+                margin-bottom: 30px;
+                color: #333;
+                font-size: 2em;
+            }
+
+            .slider,
+            .shop-by-category,
+            .latest-products,
+            .features,
+            .cart-products-list,
+            .order-summary,
+            .shipping-info,
+            .category-list,
+            .search-products-list {
+                margin: 20px 0;
+                padding: 0 20px; /* Add some padding to sections */
+            }
+
+            .slide,
+            .category,
+            .product,
+            .cart-product,
+            .about-content,
+            .feature-list,
+            .testimonial-list {
+                margin: 10px 0;
+            }
+
+            .slide img,
+            .category img,
+            .product img,
+            .cart-product img,
+            .about-image img {
+                max-width: 100%;
+            }
+
+            .features .feature-list,
+            .testimonials .testimonial-list,
+            .products,
+            .cart-products-list,
+            .category-list,
+            .search-products-list,
+            .products-list {
+                /* Added products-list */
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center; /* Center items */
+                gap: 20px; /* Gap between items */
+            }
+
+            .feature,
+            .testimonial,
+            .product,
+            .related-product {
+                flex: 1 0 28%; /* Adjusted flex basis for 3 columns with gap */
+                margin: 0; /* Remove margin here, use gap */
+                padding: 15px;
+                border: 1px solid #ddd;
+                text-align: center;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+                transition:
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease;
+            }
+
+            .product:hover,
+            .related-product:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+            }
+
+            .product img {
+                height: 250px; /* Consistent height for product images */
+                object-fit: contain; /* Ensure entire image is visible */
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .product button {
+                background-color: mediumaquamarine;
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 1em;
+                transition: background-color 0.3s ease;
+            }
+
+            .product button:hover {
+                background-color: seagreen;
+            }
+
+            .scroll-to-top {
+                position: fixed;
+                bottom: 80px; /* Above the footer */
+                right: 20px;
+                display: none;
+                padding: 10px 20px;
+                background: #333;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                z-index: 999;
+                opacity: 0.8;
+                transition: opacity 0.3s ease;
+            }
+
+            .scroll-to-top:hover {
+                opacity: 1;
+            }
+
+            footer {
+                text-align: center;
+                padding: 10px 0;
+                background: seagreen;
+                color: white;
+                position: relative; /* Changed from fixed to relative for better document flow */
+                bottom: 0;
+                width: 100%;
+                height: 50px; /* Set a fixed height */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Products Page Filters */
+            .filters {
+                text-align: center;
+                margin-bottom: 30px;
+                padding: 15px;
+                background-color: #f9f9f9;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .filters select,
+            .filters input[type="range"] {
+                margin: 10px 0;
+                padding: 8px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                width: 80%;
+                max-width: 400px;
+            }
+
+            .filters .d-flex {
+                display: flex;
+                justify-content: space-between;
+                width: 80%;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            /* Product View Page */
+            .product-details {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 40px;
+                justify-content: center;
+                align-items: flex-start;
+                margin-top: 30px;
+            }
+
+            .product-details .product-images {
+                flex: 1 1 400px;
+                max-width: 500px;
+            }
+
+            .product-details .product-images img {
+                width: 100%;
+                height: auto;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .product-details .product-description {
+                flex: 1 1 400px;
+                max-width: 500px;
+                text-align: left;
+            }
+
+            .product-description h2 {
+                margin-top: 0;
+                font-size: 2.5em;
+                color: #333;
+            }
+
+            .product-description p {
+                font-size: 1.2em;
+                line-height: 1.6;
+                color: #555;
+            }
+
+            .product-description button {
+                background-color: mediumaquamarine;
+                color: white;
+                border: none;
+                padding: 12px 25px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 1.1em;
+                transition: background-color 0.3s ease;
+                margin-top: 20px;
+            }
+
+            .product-description button:hover {
+                background-color: seagreen;
+            }
+
+            /* Cart Page */
+            .cart-product {
+                display: flex;
+                align-items: center;
+                border: 1px solid #eee;
+                padding: 15px;
+                margin-bottom: 15px;
+                border-radius: 8px;
+                background-color: #fff;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+                gap: 20px;
+            }
+
+            .cart-product img {
+                width: 100px;
+                height: 100px;
+                object-fit: contain;
+                border-radius: 4px;
+            }
+
+            .cart-product-details {
+                flex-grow: 1;
+                text-align: left;
+            }
+
+            .cart-product-details h3 {
+                margin: 0 0 5px 0;
+                color: #333;
+            }
+
+            .cart-product-details p {
+                margin: 0 0 5px 0;
+                color: #666;
+            }
+
+            .cart-product-details input[type="number"] {
+                width: 60px;
+                padding: 5px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                text-align: center;
+            }
+
+            .cart-product-details .remove-item {
+                color: crimson;
+                text-decoration: none;
+                font-size: 0.9em;
+                transition: color 0.3s ease;
+            }
+
+            .cart-product-details .remove-item:hover {
+                color: darkred;
+            }
+
+            .cart-total {
+                text-align: right;
+                margin-top: 30px;
+                padding-top: 20px;
+                border-top: 2px solid #eee;
+                font-size: 1.5em;
+                font-weight: bold;
+                color: #333;
+            }
+
+            .cart-total button {
+                background-color: mediumaquamarine;
+                color: white;
+                border: none;
+                padding: 12px 25px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 1.1em;
+                transition: background-color 0.3s ease;
+                margin-top: 20px;
+            }
+
+            .cart-total button:hover {
+                background-color: seagreen;
+            }
+
+            /* Checkout and Shipping Info */
+            .order-summary,
+            .shipping-info {
+                max-width: 600px;
+                margin: 30px auto;
+                padding: 30px;
+                border: 1px solid #eee;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+                background-color: #fff;
+            }
+
+            .shipping-info form label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: bold;
+                color: #555;
+            }
+
+            .shipping-info form input[type="text"],
+            .shipping-info form input[type="email"] {
+                width: calc(100% - 20px);
+                padding: 10px;
+                margin-bottom: 20px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 1em;
+            }
+
+            .shipping-info form button[type="submit"] {
+                background-color: mediumaquamarine;
+                color: white;
+                border: none;
+                padding: 12px 25px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 1.1em;
+                transition: background-color 0.3s ease;
+                width: 100%;
+            }
+
+            .shipping-info form button[type="submit"]:hover {
+                background-color: seagreen;
+            }
+
+            /* About Us */
+            .about-content {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 40px;
+                margin-top: 30px;
+                justify-content: center;
+            }
+
+            .about-image {
+                flex: 1 1 400px;
+                max-width: 500px;
+            }
+
+            .about-image img {
+                width: 100%;
+                height: auto;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .about-text {
+                flex: 1 1 400px;
+                max-width: 600px;
+                text-align: left;
+                font-size: 1.1em;
+                line-height: 1.8;
+                color: #444;
+            }
+
+            /* Contact Us */
+            .contact-info {
+                text-align: center;
+                margin-bottom: 30px;
+                font-size: 1.2em;
+                color: #555;
+            }
+
+            .contact-form {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 30px;
+                border: 1px solid #eee;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+                background-color: #fff;
+            }
+
+            .contact-form label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: bold;
+                color: #555;
+            }
+
+            .contact-form input[type="text"],
+            .contact-form input[type="email"],
+            .contact-form textarea {
+                width: calc(100% - 20px);
+                padding: 10px;
+                margin-bottom: 20px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 1em;
+            }
+
+            .contact-form textarea {
+                resize: vertical;
+                min-height: 100px;
+            }
+
+            .contact-form button[type="submit"] {
+                background-color: mediumaquamarine;
+                color: white;
+                border: none;
+                padding: 12px 25px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 1.1em;
+                transition: background-color 0.3s ease;
+                width: 100%;
+            }
+
+            .contact-form button[type="submit"]:hover {
+                background-color: seagreen;
+            }
+
+            /* Search Page */
+            .search-box {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            .search-box input[type="text"] {
+                width: 80%;
+                max-width: 500px;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 1.1em;
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="logo.jpg" height="100px;" alt="Logo Image" />
+            </div>
+            <ul>
+                <li><a href="#" onclick="showSection('home')">Home</a></li>
+                <li>
+                    <a href="#" onclick="showSection('products')">Products</a>
+                </li>
+                <li>
+                    <a href="#" onclick="showSection('category')">Category</a>
+                </li>
+                <li><a href="#" onclick="showSection('about')">About Us</a></li>
+                <li>
+                    <a href="#" onclick="showSection('contact')">Contact Us</a>
+                </li>
+                <li>
+                    <a href="#" onclick="showSection('cart')"
+                        >Cart (<span id="cart-count">0</span>)</a
+                    >
+                </li>
+                <li><a href="#" onclick="showSection('search')">Search</a></li>
+            </ul>
+        </nav>
+
+        <section id="home" class="section active">
+            <section class="slider">
+                <div class="slider-frame">
+                    <div class="slide-images">
+                        <div class="img-container">
+                            <img src="Slider 1.jpg" alt="Slider Image 1" />
+                        </div>
+                        <div class="img-container">
+                            <img src="Slider 2.jpg" alt="Slider Image 2" />
+                        </div>
+                        <div class="img-container">
+                            <img src="Slider 3.jpg" alt="Slider Image 3" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="shop-by-category">
+                <h2>Shop by Category</h2>
+                <div class="categories">
+                    <div
+                        class="category"
+                        onclick="showSection('products', 'straps')"
+                    >
+                        <img src="category-straps.jpg" alt="Straps" />
+                        <p>Straps</p>
+                    </div>
+                    <div
+                        class="category"
+                        onclick="showSection('products', 'cases')"
+                    >
+                        <img src="category-cases.jpg" alt="Cases" />
+                        <p>Case Watches</p>
+                    </div>
+                    <div
+                        class="category"
+                        onclick="showSection('products', 'fitness')"
+                    >
+                        <img src="category-fitness.jpg" alt="Fitness" />
+                        <p>Fitness Trackers</p>
+                    </div>
+                </div>
+            </section>
+            <section class="latest-products">
+                <h2>Latest Products</h2>
+                <div class="products">
+                    <div class="product">
+                        <img
+                            src="product 4.jpg"
+                            alt="WOLF WINDSOR"
+                            style="height: 300px"
+                        />
+                        <p>WOLF WINDSOR</p>
+                        <p>Rs.33,789.82</p>
+                        <button
+                            onclick="addToCart({id: 'prod4', name: 'WOLF WINDSOR', price: 33789.82, image: 'product 4.jpg', category: 'cases'})"
+                        >
+                            Add to Cart
+                        </button>
+                    </div>
+                    <div class="product">
+                        <img
+                            src="product 5.jpg"
+                            alt="SKG SMART FITNESS TRACKER WATCH"
+                        />
+                        <p>SKG SMART FITNESS TRACKER WATCH</p>
+                        <p>Rs.6,408.00</p>
+                        <button
+                            onclick="addToCart({id: 'prod5', name: 'SKG SMART FITNESS TRACKER WATCH', price: 6408.00, image: 'product 5.jpg', category: 'fitness'})"
+                        >
+                            Add to Cart
+                        </button>
+                    </div>
+                    <div class="product">
+                        <img
+                            src="product 6.jpg"
+                            alt="WALKERFIT F9 FITNESS TRACKER"
+                        />
+                        <p>WALKERFIT F9 FITNESS TRACKER</p>
+                        <p>Rs.3,793.90</p>
+                        <button
+                            onclick="addToCart({id: 'prod6', name: 'WALKERFIT F9 FITNESS TRACKER', price: 3793.90, image: 'product 6.jpg', category: 'fitness'})"
+                        >
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <section class="features">
+                <h2>Features</h2>
+                <div class="feature-list">
+                    <div class="feature">
+                        Discover High-Quality Wristwatches
+                    </div>
+                    <div class="feature">
+                        Offering a premium watches for affordable Prices
+                    </div>
+                    <div class="feature">
+                        Experience a exceptional great Customer Service
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="products" class="section">
+            <h2>All Products</h2>
+            <div class="filters">
+                <h3>Filter Products</h3>
+                <select id="category-filter">
+                    <option value="all">All Categories</option>
+                    <option value="straps">Straps</option>
+                    <option value="cases">Case Watches</option>
+                    <option value="fitness">Fitness Tracker</option>
+                </select>
+                <h3>
+                    Price Range: Rs. <span id="price-range-value">1,000</span> -
+                    Rs. 35,000
+                </h3>
+                <input
+                    type="range"
+                    id="price-range"
+                    min="1000"
+                    max="35000"
+                    step="1000"
+                    value="35000"
+                />
+                <div class="d-flex justify-content-between">
+                    <label>Rs. 1,000</label>
+                    <label>Rs. 35,000</label>
+                </div>
+            </div>
+            <div class="products-list" id="all-products-list">
+                <div
+                    class="product"
+                    data-id="prod1"
+                    data-category="straps"
+                    data-price="19320.00"
+                    onclick="showProductDetails('prod1')"
+                >
+                    <img src="product 1.jpg" alt="CALVIN KLEIN" />
+                    <p>CALVIN KLEIN</p>
+                    <p>Rs.19,320.00</p>
+                    <button
+                        onclick="event.stopPropagation(); addToCart({id: 'prod1', name: 'CALVIN KLEIN', price: 19320.00, image: 'product 1.jpg', category: 'straps'})"
+                    >
+                        Add to Cart
+                    </button>
+                </div>
+                <div
+                    class="product"
+                    data-id="prod2"
+                    data-category="straps"
+                    data-price="11925.00"
+                    onclick="showProductDetails('prod2')"
+                >
+                    <img src="product 2.jpg" alt="TITAN CLASSIC" />
+                    <p>TITAN CLASSIC</p>
+                    <p>Rs.11,925.00</p>
+                    <button
+                        onclick="event.stopPropagation(); addToCart({id: 'prod2', name: 'TITAN CLASSIC', price: 11925.00, image: 'product 2.jpg', category: 'straps'})"
+                    >
+                        Add to Cart
+                    </button>
+                </div>
+                <div
+                    class="product"
+                    data-id="prod3"
+                    data-category="cases"
+                    data-price="28819.00"
+                    onclick="showProductDetails('prod3')"
+                >
+                    <img src="product 3.jpg" alt="SAFFIANO WATCH ROLL" />
+                    <p>SAFFIANO WATCH ROLL</p>
+                    <p>Rs.28,819.00</p>
+                    <button
+                        onclick="event.stopPropagation(); addToCart({id: 'prod3', name: 'SAFFIANO WATCH ROLL', price: 28819.00, image: 'product 3.jpg', category: 'cases'})"
+                    >
+                        Add to Cart
+                    </button>
+                </div>
+                <div
+                    class="product"
+                    data-id="prod4"
+                    data-category="cases"
+                    data-price="33789.82"
+                    onclick="showProductDetails('prod4')"
+                >
+                    <img src="product 4.jpg" alt="WOLF WINDSOR" />
+                    <p>WOLF WINDSOR</p>
+                    <p>Rs.33,789.82</p>
+                    <button
+                        onclick="event.stopPropagation(); addToCart({id: 'prod4', name: 'WOLF WINDSOR', price: 33789.82, image: 'product 4.jpg', category: 'cases'})"
+                    >
+                        Add to Cart
+                    </button>
+                </div>
+                <div
+                    class="product"
+                    data-id="prod5"
+                    data-category="fitness"
+                    data-price="6408.00"
+                    onclick="showProductDetails('prod5')"
+                >
+                    <img
+                        src="product 5.jpg"
+                        alt="SKG SMART FITNESS TRACKER WATCH"
+                    />
+                    <p>SKG SMART FITNESS TRACKER WATCH</p>
+                    <p>Rs.6,408.00</p>
+                    <button
+                        onclick="event.stopPropagation(); addToCart({id: 'prod5', name: 'SKG SMART FITNESS TRACKER WATCH', price: 6408.00, image: 'product 5.jpg', category: 'fitness'})"
+                    >
+                        Add to Cart
+                    </button>
+                </div>
+                <div
+                    class="product"
+                    data-id="prod6"
+                    data-category="fitness"
+                    data-price="3793.90"
+                    onclick="showProductDetails('prod6')"
+                >
+                    <img
+                        src="product 6.jpg"
+                        alt="WALKERFIT F9 FITNESS TRACKER"
+                    />
+                    <p>WALKERFIT F9 FITNESS TRACKER</p>
+                    <p>Rs.3,793.90</p>
+                    <button
+                        onclick="event.stopPropagation(); addToCart({id: 'prod6', name: 'WALKERFIT F9 FITNESS TRACKER', price: 3793.90, image: 'product 6.jpg', category: 'fitness'})"
+                    >
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="product-view" class="section">
+            <div class="product-details">
+                <div class="product-images">
+                    <img id="product-view-image" src="" alt="Product Image" />
+                </div>
+                <div class="product-description">
+                    <h2 id="product-view-name"></h2>
+                    <p id="product-view-description"></p>
+                    <p>Price: <span id="product-view-price"></span></p>
+                    <p>Ratings: ★★★★☆</p>
+                    <button id="add-to-cart-product-view">Add to Cart</button>
+                </div>
+            </div>
+            <section class="related-products">
+                <h2>Related Products</h2>
+                <div class="products"></div>
+            </section>
+        </section>
+
+        <section id="category" class="section">
+            <h2>Shop by Category</h2>
+            <div class="category-list">
+                <div
+                    class="category"
+                    onclick="showSection('products', 'straps')"
+                >
+                    <img src="category-straps.jpg" alt="Straps" />
+                    <p>Straps</p>
+                </div>
+                <div
+                    class="category"
+                    onclick="showSection('products', 'cases')"
+                >
+                    <img src="category-cases.jpg" alt="Cases" />
+                    <p>Case Watches</p>
+                </div>
+                <div
+                    class="category"
+                    onclick="showSection('products', 'fitness')"
+                >
+                    <img src="category-fitness.jpg" alt="Fitness" />
+                    <p>Fitness Trackers</p>
+                </div>
+            </div>
+            <div>
+                <h2 class="product-heading">Featured Straps</h2>
+                <div class="category-list">
+                    <div class="product">
+                        <img src="product 1.jpg" alt="Leather Strap" />
+                        <p>CALVIN KLEIN Metal Strap</p>
+                        <p>Rs.19,320.00</p>
+                    </div>
+                    <div class="product">
+                        <img src="product 2.jpg" alt="Metal Strap" />
+                        <p>TITAN CLASSIC Strap</p>
+                        <p>Rs.11,925.00</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h2 class="product-heading">Featured Case Watches</h2>
+                <div class="category-list">
+                    <div class="product">
+                        <img src="product 3.jpg" alt="Watch Roll" />
+                        <p>SAFFIANO WATCH ROLL</p>
+                        <p>Rs.28,819.00</p>
+                    </div>
+                    <div class="product">
+                        <img src="product 4.jpg" alt="Wolf Windsor" />
+                        <p>WOLF WINDSOR</p>
+                        <p>Rs.33,789.82</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h2 class="product-heading">Featured Fitness Trackers</h2>
+                <div class="category-list">
+                    <div class="product">
+                        <img src="product 5.jpg" alt="Fitness Tracker 1" />
+                        <p>SKG SMART FITNESS TRACKER WATCH</p>
+                        <p>Rs.6,408.00</p>
+                    </div>
+                    <div class="product">
+                        <img src="product 6.jpg" alt="Fitness Tracker 2" />
+                        <p>WALKERFIT F9 FITNESS TRACKER</p>
+                        <p>Rs.3,793.90</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cart" class="section">
+            <h2>Shopping Cart</h2>
+            <div class="cart-products-list" id="cart-items-container">
+                <p
+                    id="empty-cart-message"
+                    style="text-align: center; color: #888"
+                >
+                    Your cart is empty.
+                </p>
+            </div>
+            <div class="cart-total">
+                <strong>Total Amount:</strong>
+                <span
+                    ><strong
+                        >Rs. <span id="cart-total-amount">0.00</span></strong
+                    ></span
+                >
+                <button onclick="proceedToCheckout()">
+                    Proceed to Checkout
+                </button>
+            </div>
+        </section>
+
+        <section id="checkout" class="section">
+            <h2>Checkout</h2>
+            <div class="order-summary">
+                <h3>Order Summary</h3>
+                <div id="checkout-order-summary"></div>
+                <p>
+                    Total:
+                    <strong
+                        >Rs.
+                        <span id="checkout-total-amount">0.00</span></strong
+                    >
+                </p>
+            </div>
+            <div class="shipping-info">
+                <h3>Shipping Information</h3>
+                <form
+                    id="shipping-form"
+                    onsubmit="event.preventDefault(); placeOrder();"
+                >
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required />
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required />
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" required />
+                    <label for="city">City:</label>
+                    <input type="text" id="city" name="city" required />
+                    <label for="postalcode">Postal Code:</label>
+                    <input
+                        type="text"
+                        id="postalcode"
+                        name="postalcode"
+                        required
+                    />
+                    <label for="country">Country:</label>
+                    <input type="text" id="country" name="country" required />
+                    <button type="submit">Place Order</button>
+                </form>
+            </div>
+        </section>
+        <section id="order-confirmation" class="section">
+            <h2>Order Confirmation</h2>
+            <p>
+                Thank you for your order! Your order number is
+                <strong>#<span id="order-number"></span></strong>.
+            </p>
+            <p>Status: <strong>Processing</strong></p>
+        </section>
+
+        <section id="about" class="section">
+            <h2>About Us</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="about.jpg" alt="About Us Image" />
+                </div>
+                <div class="about-text">
+                    <p>
+                        We crystals offer high-quality wristwatch accessories to
+                        enhance your timepiece experience. Our products are
+                        crafted with precision and care to ensure customer
+                        satisfaction.Crystals is India’s foremost youth
+                        accessories brand. It is sporty and coed. It believes
+                        that it is all about range and delivers just that in
+                        almost ungodly quick cycles. The brand stays focused on
+                        its audience and delivers what they want before they
+                        even know they want to. Crystals is accessible and owns
+                        the playing field. It is not cheap, just affordable. It
+                        is not just about fashion but rather, lifestyle
+                    </p>
+                </div>
+            </div>
+            <div class="features">
+                <h3>Features</h3>
+                <div class="feature-list">
+                    <div class="feature">
+                        Discover High-Quality Wristwatches
+                    </div>
+                    <div class="feature">
+                        Offering a premium watches for affordable Prices
+                    </div>
+                    <div class="feature">
+                        Experience a exceptional great Customer Service
+                    </div>
+                </div>
+            </div>
+            <div class="testimonials">
+                <h3>Testimonials</h3>
+                <div class="testimonial-list">
+                    <div class="testimonial">
+                        "Excellent quality and fast shipping!" - John Doe
+                    </div>
+                    <div class="testimonial">
+                        "Great customer service and products!" - Jane Smith
+                    </div>
+                    <div class="testimonial">
+                        "Highly recommend this store!" - Mike Johnson
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h2>Contact Us</h2>
+            <div class="contact-info">
+                <p>Email: crystals@gmail.com</p>
+                <p>Phone: +123 456 7890</p>
+            </div>
+            <div class="contact-form">
+                <h3>Send us a message</h3>
+                <form
+                    id="contactForm"
+                    onsubmit="event.preventDefault(); submitContactForm();"
+                >
+                    <label for="contact-name">NAME:</label>
+                    <input type="text" id="contact-name" name="name" required />
+                    <label for="contact-email">EMAIL:</label>
+                    <input
+                        type="email"
+                        id="contact-email"
+                        name="email"
+                        required
+                    />
+                    <label for="contact-message">MESSAGE:</label>
+                    <textarea
+                        id="contact-message"
+                        name="message"
+                        required
+                    ></textarea>
+                    <button type="submit">SUBMIT</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="search" class="section">
+            <h2>Search Products</h2>
+            <div class="search-box">
+                <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Search for products..."
+                    onkeyup="filterSearchResults()"
+                />
+            </div>
+            <div class="products-list" id="search-results-list">
+                <p
+                    id="no-search-results"
+                    style="text-align: center; color: #888; display: none"
+                >
+                    No products found.
+                </p>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; 2024 CRYSTALS. All rights reserved.</p>
+        </footer>
+
+        <button class="scroll-to-top" onclick="scrollToTop()">↑</button>
+
+        <script>
+            // Global array to store all products (for filtering and searching)
+            const allProducts = [
+                {
+                    id: "prod1",
+                    name: "CALVIN KLEIN",
+                    description: "High-quality leather strap watch",
+                    price: 19320.0,
+                    image: "product 1.jpg",
+                    category: "straps",
+                },
+                {
+                    id: "prod2",
+                    name: "TITAN CLASSIC",
+                    description: "Durable metal strap.",
+                    price: 11925.0,
+                    image: "product 2.jpg",
+                    category: "straps",
+                },
+                {
+                    id: "prod3",
+                    name: "SAFFIANO WATCH ROLL",
+                    description: "Comfortable case watches.",
+                    price: 28819.0,
+                    image: "product 3.jpg",
+                    category: "cases",
+                },
+                {
+                    id: "prod4",
+                    name: "WOLF WINDSOR",
+                    description: "Classic case watches to comfort you.",
+                    price: 33789.82,
+                    image: "product 4.jpg",
+                    category: "cases",
+                },
+                {
+                    id: "prod5",
+                    name: "SKG SMART FITNESS TRACKER WATCH",
+                    description:
+                        "A fantastic fitness tracker to fascinate you.",
+                    price: 6408.0,
+                    image: "product 5.jpg",
+                    category: "fitness",
+                },
+                {
+                    id: "prod6",
+                    name: "WALKERFIT F9 FITNESS TRACKER",
+                    description: "Fitness F9 Tracker.",
+                    price: 3793.9,
+                    image: "product 6.jpg",
+                    category: "fitness",
+                },
+            ];
+
+            // Cart array to store selected items
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            // --- Utility Functions ---
+
+            function showSection(sectionId, filterCategory = "all") {
+                document.querySelectorAll(".section").forEach((section) => {
+                    section.classList.remove("active");
+                });
+                document.getElementById(sectionId).classList.add("active");
+
+                // Specific logic for certain sections
+                if (sectionId === "products") {
+                    document.getElementById("category-filter").value =
+                        filterCategory;
+                    filterProducts(); // Apply initial filter
+                } else if (sectionId === "cart") {
+                    renderCart();
+                } else if (sectionId === "checkout") {
+                    renderCheckoutSummary();
+                } else if (sectionId === "search") {
+                    document.getElementById("search-input").value = ""; // Clear search on load
+                    filterSearchResults(); // Show all initially or empty if no search
+                }
+            }
+
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                });
+            }
+
+            window.onscroll = function () {
+                const scrollToTopBtn = document.querySelector(".scroll-to-top");
+                if (
+                    document.body.scrollTop > 20 ||
+                    document.documentElement.scrollTop > 20
+                ) {
+                    scrollToTopBtn.style.display = "block";
+                } else {
+                    scrollToTopBtn.style.display = "none";
+                }
+            };
+
+            // --- Product Filtering and Search (Problem 1 & 4) ---
+
+            const categoryFilter = document.getElementById("category-filter");
+            const priceRange = document.getElementById("price-range");
+            const priceRangeValueDisplay =
+                document.getElementById("price-range-value");
+            const allProductsList =
+                document.getElementById("all-products-list");
+
+            function filterProducts() {
+                const selectedCategory = categoryFilter.value;
+                const maxPrice = parseFloat(priceRange.value);
+                priceRangeValueDisplay.textContent =
+                    maxPrice.toLocaleString("en-IN"); // Update price display
+
+                allProductsList
+                    .querySelectorAll(".product")
+                    .forEach((productElement) => {
+                        const productCategory = productElement.dataset.category;
+                        const productPrice = parseFloat(
+                            productElement.dataset.price,
+                        );
+
+                        const categoryMatch =
+                            selectedCategory === "all" ||
+                            productCategory === selectedCategory;
+                        const priceMatch = productPrice <= maxPrice;
+
+                        if (categoryMatch && priceMatch) {
+                            productElement.style.display = "block";
+                        } else {
+                            productElement.style.display = "none";
+                        }
+                    });
+            }
+
+            categoryFilter.addEventListener("change", filterProducts);
+            priceRange.addEventListener("input", filterProducts); // Use 'input' for continuous update
+
+            // Initial filter when the products page is first loaded
+            document.addEventListener("DOMContentLoaded", () => {
+                filterProducts();
+                updateCartCount(); // Initialize cart count on page load
+            });
+
+            // --- Product Details View ---
+            function showProductDetails(productId) {
+                const product = allProducts.find((p) => p.id === productId);
+                if (!product) return;
+
+                document.getElementById("product-view-image").src =
+                    product.image;
+                document.getElementById("product-view-name").textContent =
+                    product.name;
+                document.getElementById(
+                    "product-view-description",
+                ).textContent = product.description;
+                document.getElementById("product-view-price").textContent =
+                    `Rs.${product.price.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
+
+                // Set up Add to Cart button for the product view
+                const addToCartBtn = document.getElementById(
+                    "add-to-cart-product-view",
+                );
+                addToCartBtn.onclick = () => {
+                    addToCart(product);
+                    alert(`${product.name} added to cart!`);
+                };
+
+                // Display related products (simple example: just show others, or filter by category)
+                const relatedProductsContainer = document.querySelector(
+                    "#product-view .related-products .products",
+                );
+                relatedProductsContainer.innerHTML = ""; // Clear previous related products
+
+                const related = allProducts
+                    .filter(
+                        (p) =>
+                            p.id !== productId &&
+                            p.category === product.category,
+                    )
+                    .slice(0, 3); // Show up to 3 related of same category
+
+                if (related.length > 0) {
+                    related.forEach((relatedProduct) => {
+                        const div = document.createElement("div");
+                        div.className = "related-product";
+                        div.innerHTML = `
+                        <img src="${relatedProduct.image}" alt="${relatedProduct.name}">
+                        <p>${relatedProduct.name}</p>
+                        <p>Rs.${relatedProduct.price.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</p>
+                        <button onclick="event.stopPropagation(); addToCart({id: '${relatedProduct.id}', name: '${relatedProduct.name}', price: ${relatedProduct.price}, image: '${relatedProduct.image}', category: '${relatedProduct.category}'});">Add to Cart</button>
+                    `;
+                        relatedProductsContainer.appendChild(div);
+                    });
+                } else {
+                    relatedProductsContainer.innerHTML =
+                        "<p>No related products found.</p>";
+                }
+
+                showSection("product-view");
+            }
+
+            // --- Cart Functionality (Problem 3) ---
+
+            function updateCartCount() {
+                const totalItems = cart.reduce(
+                    (sum, item) => sum + item.quantity,
+                    0,
+                );
+                document.getElementById("cart-count").textContent = totalItems;
+            }
+
+            function saveCart() {
+                localStorage.setItem("cart", JSON.stringify(cart));
+                updateCartCount();
+            }
+
+            function addToCart(product) {
+                const existingItem = cart.find(
+                    (item) => item.id === product.id,
+                );
+
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push({ ...product, quantity: 1 });
+                }
+                saveCart();
+                alert(
+                    `${product.name} added to cart! Quantity: ${existingItem ? existingItem.quantity : 1}`,
+                );
+            }
+
+            function removeFromCart(productId) {
+                cart = cart.filter((item) => item.id !== productId);
+                saveCart();
+                renderCart(); // Re-render cart after removal
+            }
+
+            function updateQuantity(productId, newQuantity) {
+                const item = cart.find((item) => item.id === productId);
+                if (item) {
+                    item.quantity = parseInt(newQuantity, 10);
+                    if (item.quantity <= 0) {
+                        removeFromCart(productId);
+                    }
+                }
+                saveCart();
+                renderCart(); // Re-render cart to update total
+            }
+
+            function renderCart() {
+                const cartItemsContainer = document.getElementById(
+                    "cart-items-container",
+                );
+                const cartTotalAmountSpan =
+                    document.getElementById("cart-total-amount");
+                const emptyCartMessage =
+                    document.getElementById("empty-cart-message");
+
+                cartItemsContainer.innerHTML = ""; // Clear existing items
+                let totalAmount = 0;
+
+                if (cart.length === 0) {
+                    emptyCartMessage.style.display = "block";
+                } else {
+                    emptyCartMessage.style.display = "none";
+                    cart.forEach((item) => {
+                        const cartProductDiv = document.createElement("div");
+                        cartProductDiv.className = "cart-product";
+                        cartProductDiv.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-product-details">
+                            <h3>${item.name}</h3>
+                            <p>Price: Rs.${item.price.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</p>
+                            <p>Quantity: <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity('${item.id}', this.value)"></p>
+                            <a href="#" class="remove-item" onclick="removeFromCart('${item.id}')">Remove item</a>
+                        </div>
+                    `;
+                        cartItemsContainer.appendChild(cartProductDiv);
+                        totalAmount += item.price * item.quantity;
+                    });
+                }
+                cartTotalAmountSpan.textContent = totalAmount.toLocaleString(
+                    "en-IN",
+                    {
+                        minimumFractionDigits: 2,
+                    },
+                );
+            }
+
+            function proceedToCheckout() {
+                if (cart.length === 0) {
+                    alert(
+                        "Your cart is empty. Please add items before proceeding to checkout.",
+                    );
+                    return;
+                }
+                showSection("checkout");
+            }
+
+            function renderCheckoutSummary() {
+                const checkoutOrderSummaryDiv = document.getElementById(
+                    "checkout-order-summary",
+                );
+                const checkoutTotalAmountSpan = document.getElementById(
+                    "checkout-total-amount",
+                );
+
+                checkoutOrderSummaryDiv.innerHTML = "";
+                let totalAmount = 0;
+
+                if (cart.length === 0) {
+                    checkoutOrderSummaryDiv.innerHTML =
+                        "<p>No items in cart.</p>";
+                } else {
+                    cart.forEach((item) => {
+                        const p = document.createElement("p");
+                        p.textContent = `${item.name} (${item.quantity} x Rs.${item.price.toLocaleString("en-IN", { minimumFractionDigits: 2 })}) - Rs.${(item.price * item.quantity).toLocaleString("en-IN", { minimumFractionDigits: 2 })}`;
+                        checkoutOrderSummaryDiv.appendChild(p);
+                        totalAmount += item.price * item.quantity;
+                    });
+                }
+                checkoutTotalAmountSpan.textContent =
+                    totalAmount.toLocaleString("en-IN", {
+                        minimumFractionDigits: 2,
+                    });
+            }
+
+            async function placeOrder() {
+                const shippingForm = document.getElementById("shipping-form");
+                const formData = new FormData(shippingForm);
+                const shippingInfo = Object.fromEntries(formData.entries());
+
+                const orderDetails = {
+                    shippingInfo: shippingInfo,
+                    items: cart,
+                    totalAmount: cart.reduce(
+                        (sum, item) => sum + item.price * item.quantity,
+                        0,
+                    ),
+                    orderDate: new Date().toISOString(),
+                };
+
+                // This is where you would send the orderDetails to your backend
+                // Example using fetch API:
+                try {
+                    const response = await fetch("/place-order", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(orderDetails),
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        document.getElementById("order-number").textContent =
+                            result.orderId || "N/A"; // Assuming backend sends an order ID
+                        showSection("order-confirmation");
+                        cart = []; // Clear cart after successful order
+                        saveCart(); // Update local storage
+                    } else {
+                        const errorData = await response.json();
+                        alert(
+                            `Order placement failed: ${errorData.message || "Server error"}`,
+                        );
+                    }
+                } catch (error) {
+                    console.error("Error placing order:", error);
+                    alert(
+                        "An error occurred while placing your order. Please try again.",
+                    );
+                }
+            }
+
+            // --- Contact Form (Problem 2) ---
+            async function submitContactForm() {
+                const contactForm = document.getElementById("contactForm");
+                const formData = new FormData(contactForm);
+                const contactData = Object.fromEntries(formData.entries());
+
+                try {
+                    const response = await fetch("/submit-contact", {
+                        // Endpoint on your backend
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(contactData),
+                    });
+
+                    if (response.ok) {
+                        alert(
+                            "Message sent successfully! We will get back to you soon.",
+                        );
+                        contactForm.reset(); // Clear the form
+                    } else {
+                        const errorData = await response.json();
+                        alert(
+                            `Failed to send message: ${errorData.message || "Server error"}`,
+                        );
+                    }
+                } catch (error) {
+                    console.error("Error submitting contact form:", error);
+                    alert(
+                        "An error occurred while sending your message. Please try again.",
+                    );
+                }
+            }
+
+            // --- Search Functionality (Problem 4) ---
+            const searchInput = document.getElementById("search-input");
+            const searchResultsList = document.getElementById(
+                "search-results-list",
+            );
+            const noSearchResultsMessage =
+                document.getElementById("no-search-results");
+
+            function filterSearchResults() {
+                const query = searchInput.value.toLowerCase().trim();
+                searchResultsList.innerHTML = ""; // Clear previous results
+                let hasResults = false;
+
+                if (query.length > 0) {
+                    const filteredProducts = allProducts.filter(
+                        (product) =>
+                            product.name.toLowerCase().includes(query) ||
+                            product.description.toLowerCase().includes(query) ||
+                            product.category.toLowerCase().includes(query),
+                    );
+
+                    if (filteredProducts.length > 0) {
+                        filteredProducts.forEach((product) => {
+                            const productDiv = document.createElement("div");
+                            productDiv.className = "product";
+                            productDiv.onclick = () =>
+                                showProductDetails(product.id);
+                            productDiv.innerHTML = `
+                            <img src="${product.image}" alt="${product.name}">
+                            <p>${product.name}</p>
+                            <p>Rs.${product.price.toLocaleString("en-IN", { minimumFractionDigits: 2 })}</p>
+                            <button onclick="event.stopPropagation(); addToCart({id: '${product.id}', name: '${product.name}', price: ${product.price}, image: '${product.image}', category: '${product.category}'})">Add to Cart</button>
+                        `;
+                            searchResultsList.appendChild(productDiv);
+                        });
+                        hasResults = true;
+                    }
+                }
+
+                if (hasResults) {
+                    noSearchResultsMessage.style.display = "none";
+                } else {
+                    noSearchResultsMessage.style.display = "block";
+                }
+            }
+        </script>
+    </body>
+</html>

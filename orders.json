@@ -1,0 +1,26 @@
+[
+  {
+    "shippingInfo": {
+      "name": "Timon",
+      "email": "timon@gmail.com",
+      "address": "ABC street,Kingston",
+      "city": "New York",
+      "postalcode": "12401",
+      "country": "U.S"
+    },
+    "items": [
+      {
+        "id": "prod2",
+        "name": "TITAN CLASSIC",
+        "price": 11925,
+        "image": "product 2.jpg",
+        "category": "straps",
+        "quantity": 1
+      }
+    ],
+    "totalAmount": 11925,
+    "orderDate": "2025-05-29T17:28:41.747Z",
+    "orderId": "ORD-1748539787134-850",
+    "timestamp": "2025-05-29T17:29:47.134Z"
+  }
+]
